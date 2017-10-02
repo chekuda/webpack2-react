@@ -97,5 +97,34 @@
      new CopyWebpackPlugin([
         { from: './public/', to:'assets' }
       ])
-    
-  
+
+### Use Bootstrap 4
+
+  First install bootstrap 4 `yarn add [last version of bootstrap4]`. Later on set up the bootstrap4 in `webppack.commun.js`.
+
+    new webpack.ProvidePlugin({
+        $: 'jquery',
+        jQuery: 'jquery',
+        'window.jQuery': 'jquery',
+        Popper: ['popper.js', 'default'],
+        'Tether': 'tether',
+        'window.Tether': 'tether',
+        // In case you imported plugins individually, you must also require them here:
+        Util: "exports-loader?Util!bootstrap/js/dist/util",
+        Dropdown: "exports-loader?Dropdown!bootstrap/js/dist/dropdown"
+      })
+
+  Now import the bootstrap in the module prefered ie: import `'bootstrap/dist/css/bootstrap-reboot.min.css'`
+
+### Use font-Awesome
+
+  Install font-awesome `yarn add font-awesome`
+  Add new rule in `webpack.common.js`
+
+    {
+      test: /\.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
+      loader: 'file-loader?name=fonts/[name].[ext]'
+    }
+  Now you can `import font-awesome`
+
+
