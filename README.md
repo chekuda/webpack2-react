@@ -89,42 +89,48 @@
 
   - Add extension in `webpack.common.js` in order to dont have to write the extension for `js or jsx` files when imported
 
-  ### Serve files for dev environment
+  ### Serve files
 
-  Im going to use `copy-webpack-plugin` for dev environments.
-  For this I will serve all the images in public folder into a virtual folder within my output dist
+  - Dev environment
 
-     new CopyWebpackPlugin([
-        { from: './public/', to:'assets' }
-      ])
+    Im going to use `copy-webpack-plugin` for dev environments.
+    For this I will serve all the images in public folder into a virtual folder within my output dist
 
-### Use Bootstrap 4
+       new CopyWebpackPlugin([
+          { from: './public/', to:'assets' }
+        ])
 
-  First install bootstrap 4 `yarn add [last version of bootstrap4]`. Later on set up the bootstrap4 in `webppack.commun.js`.
+  - Pro environment
 
-    new webpack.ProvidePlugin({
-        $: 'jquery',
-        jQuery: 'jquery',
-        'window.jQuery': 'jquery',
-        Popper: ['popper.js', 'default'],
-        'Tether': 'tether',
-        'window.Tether': 'tether',
-        // In case you imported plugins individually, you must also require them here:
-        Util: "exports-loader?Util!bootstrap/js/dist/util",
-        Dropdown: "exports-loader?Dropdown!bootstrap/js/dist/dropdown"
-      })
+    I will use my express server `server.js`, serving all the files within the dist directory `server.use(express.static(__dirname + '/dist'))` staticaly
 
-  Now import the bootstrap in the module prefered ie: import `'bootstrap/dist/css/bootstrap-reboot.min.css'`
+  ### Use Bootstrap 4
 
-### Use font-Awesome
+    First install bootstrap 4 `yarn add [last version of bootstrap4]`. Later on set up the bootstrap4 in `webppack.commun.js`.
 
-  Install font-awesome `yarn add font-awesome`
-  Add new rule in `webpack.common.js`
+      new webpack.ProvidePlugin({
+          $: 'jquery',
+          jQuery: 'jquery',
+          'window.jQuery': 'jquery',
+          Popper: ['popper.js', 'default'],
+          'Tether': 'tether',
+          'window.Tether': 'tether',
+          // In case you imported plugins individually, you must also require them here:
+          Util: "exports-loader?Util!bootstrap/js/dist/util",
+          Dropdown: "exports-loader?Dropdown!bootstrap/js/dist/dropdown"
+        })
 
-    {
-      test: /\.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
-      loader: 'file-loader?name=fonts/[name].[ext]'
-    }
-  Now you can `import font-awesome`
+    Now import the bootstrap in the module prefered ie: import `'bootstrap/dist/css/bootstrap-reboot.min.css'`
+
+  ### Use font-Awesome
+
+    Install font-awesome `yarn add font-awesome`
+    Add new rule in `webpack.common.js`
+
+      {
+        test: /\.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
+        loader: 'file-loader?name=fonts/[name].[ext]'
+      }
+    Now you can `import font-awesome`
 
 
